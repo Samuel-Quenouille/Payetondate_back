@@ -1,0 +1,708 @@
+  [1m[35m (354.3ms)[0m  [1m[35mCREATE DATABASE "Payetondate_development" ENCODING = 'unicode'[0m
+  [1m[35m (140.0ms)[0m  [1m[35mCREATE DATABASE "Payetondate_test" ENCODING = 'unicode'[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20230912103848)
+  [1m[36mTRANSACTION (8.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (7.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912103848"]]
+  [1m[36mTRANSACTION (14.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJwtDenylist (20230912105013)
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "jwt_denylist" ("id" bigserial primary key, "jti" character varying NOT NULL, "exp" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_jwt_denylist_on_jti" ON "jwt_denylist" ("jti")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912105013"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-09-12 10:53:43.125921"], ["updated_at", "2023-09-12 10:53:43.125921"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users" for 127.0.0.1 at 2023-09-12 14:27:56 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (10.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 12:27:57.474981"], ["updated_at", "2023-09-12 12:27:57.474981"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 475ms (Views: 0.4ms | ActiveRecord: 21.0ms | Allocations: 45765)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 14:28:11 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 141ms (ActiveRecord: 3.1ms | Allocations: 7821)
+
+
+  
+NameError (undefined local variable or method `flash' for #<Users::RegistrationsController:0x00000000009b28>):
+  
+devise (4.9.2) app/controllers/devise_controller.rb:160:in `set_flash_message'
+devise (4.9.2) app/controllers/devise_controller.rb:116:in `require_no_authentication'
+activesupport (7.0.8) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8) lib/active_support/callbacks.rb:180:in `block (2 levels) in halting_and_conditional'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8) lib/active_support/callbacks.rb:181:in `block in halting_and_conditional'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:106:in `run_callbacks'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8) lib/abstract_controller/base.rb:151:in `process'
+actionpack (7.0.8) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (2.2.8) lib/rack/builder.rb:244:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+rack (2.2.8) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.8) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (7.0.8) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (7.0.8) lib/rails/engine.rb:530:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2023-09-12 14:34:51 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 18.5ms | Allocations: 6550)
+
+
+  
+NameError (undefined local variable or method `flash' for #<Users::RegistrationsController:0x00000000009bf0>):
+  
+devise (4.9.2) app/controllers/devise_controller.rb:160:in `set_flash_message'
+devise (4.9.2) app/controllers/devise_controller.rb:116:in `require_no_authentication'
+activesupport (7.0.8) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8) lib/active_support/callbacks.rb:180:in `block (2 levels) in halting_and_conditional'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8) lib/active_support/callbacks.rb:181:in `block in halting_and_conditional'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:106:in `run_callbacks'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8) lib/abstract_controller/base.rb:151:in `process'
+actionpack (7.0.8) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (2.2.8) lib/rack/builder.rb:244:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+rack (2.2.8) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.8) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (7.0.8) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (7.0.8) lib/rails/engine.rb:530:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2023-09-12 14:38:34 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test2@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 12:38:35.273699"], ["updated_at", "2023-09-12 12:38:35.273699"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 414ms (Views: 0.7ms | ActiveRecord: 10.6ms | Allocations: 45307)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 14:38:46 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test3@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test3@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test3@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 12:38:47.068280"], ["updated_at", "2023-09-12 12:38:47.068280"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Completed 200 OK in 336ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 4230)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-12 14:43:08 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test3@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test3@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 10ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 1699)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-12 14:43:15 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.7ms | Allocations: 1545)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-12 14:43:19 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 1537)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 14:43:46 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Completed 401 Unauthorized in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1350)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 14:48:29 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 378)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 14:59:04 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 344)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 14:59:10 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test@test.com"}, "session"=>{"user"=>{"email"=>"test@test.com"}}}
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 340)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 14:59:24 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 334)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-12 15:02:17 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test2@test.com"], ["LIMIT", 1]]
+Completed 200 OK in 471ms (Views: 0.4ms | ActiveRecord: 24.0ms | Allocations: 6104)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2023-09-12 15:02:29 +0200
+Processing by Users::SessionsController#destroy as */*
+  Parameters: {"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Completed 401 Unauthorized in 14ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1307)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 16:23:59 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+You have 1 pending migration:
+
+20230912140514_create_places.rb
+
+
+):
+  
+activerecord (7.0.8) lib/active_record/migration.rb:662:in `check_pending!'
+activerecord (7.0.8) lib/active_record/migration.rb:627:in `block (2 levels) in call'
+activesupport (7.0.8) lib/active_support/file_update_checker.rb:83:in `execute'
+activerecord (7.0.8) lib/active_record/migration.rb:632:in `block in call'
+activerecord (7.0.8) lib/active_record/migration.rb:624:in `synchronize'
+activerecord (7.0.8) lib/active_record/migration.rb:624:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (7.0.8) lib/rails/engine.rb:530:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlaces (20230912140514)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.7ms)[0m  [1m[35mCREATE TABLE "places" ("id" bigserial primary key, "title" character varying, "description" text, "price" integer, "category" character varying, "image" character varying, "address" character varying, "zip_code" integer, "city" character varying, "borough" integer, "url" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912140514"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/places" for 127.0.0.1 at 2023-09-12 16:24:56 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Lieu test", "description"=>"Test test test", "price"=>"20", "category"=>"restaurant", "address"=>"124 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"11"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mPlace Create (8.3ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["title", "Lieu test"], ["description", "Test test test"], ["price", 20], ["category", "restaurant"], ["image", nil], ["address", "124 rue du Parc"], ["zip_code", 75000], ["city", "Paris"], ["borough", 11], ["url", nil], ["created_at", "2023-09-12 14:24:56.895842"], ["updated_at", "2023-09-12 14:24:56.895842"]]
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+Completed 201 Created in 72ms (Views: 0.7ms | ActiveRecord: 19.4ms | Allocations: 42986)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 16:25:34 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 2", "description"=>"Test test test", "price"=>"50", "category"=>"restaurant", "address"=>"23 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"14"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mPlace Create (2.1ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["title", "Lieu test 2"], ["description", "Test test test"], ["price", 50], ["category", "restaurant"], ["image", nil], ["address", "23 rue du Parc"], ["zip_code", 75000], ["city", "Paris"], ["borough", 14], ["url", nil], ["created_at", "2023-09-12 14:25:34.953501"], ["updated_at", "2023-09-12 14:25:34.953501"]]
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+Completed 201 Created in 29ms (Views: 0.9ms | ActiveRecord: 5.8ms | Allocations: 2101)
+
+
+Started GET "/places" for 127.0.0.1 at 2023-09-12 16:26:18 +0200
+Processing by PlacesController#index as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 2", "description"=>"Test test test", "price"=>"50", "category"=>"restaurant", "address"=>"23 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"14"}}
+  [1m[36mPlace Load (0.3ms)[0m  [1m[34mSELECT "places".* FROM "places"[0m
+  ↳ app/controllers/places_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.3ms | Allocations: 1175)
+
+
+Started GET "/places/1" for 127.0.0.1 at 2023-09-12 16:26:30 +0200
+Processing by PlacesController#show as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 2", "description"=>"Test test test", "price"=>"50", "category"=>"restaurant", "address"=>"23 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"14"}, "id"=>"1"}
+  [1m[36mPlace Load (0.2ms)[0m  [1m[34mSELECT "places".* FROM "places" WHERE "places"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/places_controller.rb:44:in `set_place'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 1546)
+
+
+Started DELETE "/places/2" for 127.0.0.1 at 2023-09-12 16:27:21 +0200
+Processing by PlacesController#destroy as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 2", "description"=>"Test test test", "price"=>"50", "category"=>"restaurant", "address"=>"23 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"14"}, "id"=>"2"}
+  [1m[36mPlace Load (0.4ms)[0m  [1m[34mSELECT "places".* FROM "places" WHERE "places"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/places_controller.rb:44:in `set_place'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:38:in `destroy'
+  [1m[36mPlace Destroy (4.8ms)[0m  [1m[31mDELETE FROM "places" WHERE "places"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/places_controller.rb:38:in `destroy'
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:38:in `destroy'
+Completed 204 No Content in 19ms (ActiveRecord: 10.5ms | Allocations: 1945)
+
+
+Started GET "/places" for 127.0.0.1 at 2023-09-12 16:27:32 +0200
+Processing by PlacesController#index as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 2", "description"=>"Test test test", "price"=>"50", "category"=>"restaurant", "address"=>"23 rue du Parc", "zip_code"=>"75000", "city"=>"Paris", "borough"=>"14"}}
+  [1m[36mPlace Load (0.4ms)[0m  [1m[34mSELECT "places".* FROM "places"[0m
+  ↳ app/controllers/places_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.4ms | Allocations: 812)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAdminToUser (20230912143901)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912143901"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPseudoToUser (20230912144001)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "pseudo" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912144001"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddBooleanToPlace (20230912144217)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "places" ADD "is_validate" boolean DEFAULT FALSE[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230912144217"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/places" for 127.0.0.1 at 2023-09-12 17:03:12 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Lieu test 3", "description"=>"Test test test 3", "price"=>"100", "category"=>"cinéma", "address"=>"45 rue de Châtelet", "zip_code"=>"75007", "city"=>"Paris", "borough"=>"7"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mPlace Create (0.7ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "Lieu test 3"], ["description", "Test test test 3"], ["price", 100], ["category", "cinéma"], ["image", nil], ["address", "45 rue de Châtelet"], ["zip_code", 75007], ["city", "Paris"], ["borough", 7], ["url", nil], ["created_at", "2023-09-12 15:03:12.547565"], ["updated_at", "2023-09-12 15:03:12.547565"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+Completed 201 Created in 107ms (Views: 1.7ms | ActiveRecord: 9.6ms | Allocations: 43702)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 17:04:00 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"description"=>"Test test test 4", "price"=>"100", "category"=>"bisou", "address"=>"4 rue de Villiers", "zip_code"=>"75007", "city"=>"Paris", "borough"=>"7"}}
+Completed 422 Unprocessable Entity in 29ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 1812)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 17:06:21 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Coucher de soleil", "description"=>"Test test test 4", "price"=>"100", "category"=>"cinéma", "address"=>"4 rue de Villiers", "zip_code"=>"7507", "city"=>"Paris3", "borough"=>"7"}}
+Completed 422 Unprocessable Entity in 7ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 929)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 17:31:31 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test3@test.com", "pseudo"=>"test", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test3@test.com", "pseudo"=>"test", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007ff668308ed0>, params: {"user"=>{"email"=>"test3@test.com", "pseudo"=>"test", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test3@test.com", "pseudo"=>"test", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (5.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test3@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 536ms (Views: 0.2ms | ActiveRecord: 73.0ms | Allocations: 25100)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 17:31:54 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007ff6666dda80>, params: {"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test4@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 342ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 3029)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 17:32:05 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test5@test.com", "pseudo"=>"test5", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test5@test.com", "pseudo"=>"test5", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007ff66802e020>, params: {"user"=>{"email"=>"test5@test.com", "pseudo"=>"test5", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test5@test.com", "pseudo"=>"test5", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test5@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 313ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 3034)
+
+
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPlace Load (2.5ms)[0m  [1m[34mSELECT "places".* FROM "places"[0m
+Started POST "/users" for 127.0.0.1 at 2023-09-12 17:41:16 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007f8733b6caa8>, params: {"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test4@test.com", "pseudo"=>"test4", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test4@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test4@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 15:41:17.335334"], ["updated_at", "2023-09-12 15:41:17.335334"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 391ms (Views: 0.5ms | ActiveRecord: 11.1ms | Allocations: 46468)
+
+
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:06:22 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test", "pseudo"=>"test4", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21a9f26a8>, params: {"user"=>{"email"=>"test", "pseudo"=>"test4", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test", "pseudo"=>"test4", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 289ms (Views: 0.3ms | ActiveRecord: 12.0ms | Allocations: 44033)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:06:36 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 232ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 2954)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:06:48 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test6@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test6@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test6@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test6@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 16:06:48.612933"], ["updated_at", "2023-09-12 16:06:48.612933"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 258ms (Views: 0.6ms | ActiveRecord: 5.1ms | Allocations: 6566)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:07:28 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21b124930>, params: {"user"=>{"email"=>"test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 233ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 3050)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:07:53 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21b1af850>, params: {"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "quenouille_samuel@yahoo.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "quenouille_samuel@yahoo.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 16:07:53.593847"], ["updated_at", "2023-09-12 16:07:53.593847"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 200 OK in 315ms (Views: 13.2ms | ActiveRecord: 1.9ms | Allocations: 5422)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:08:11 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa219180278>, params: {"user"=>{"email"=>"", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 227ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 3048)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:08:25 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa2197d4980>, params: {"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"quenouille_samuel@yahoo.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "quenouille_samuel@yahoo.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 10ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 3025)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:08:38 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21a8647c8>, params: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test8@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 3011)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:08:55 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21a9e0458>, params: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test8@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test8@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-12 16:08:55.932333"], ["updated_at", "2023-09-12 16:08:55.932333"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+Completed 200 OK in 243ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 5397)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:09:14 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :pseudo. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fa21ac4ea00>, params: {"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}, "controller"=>"users/registrations", "action"=>"create", "registration"=>{"user"=>{"email"=>"test8@test.com", "pseudo"=>"samuel", "password"=>"[FILTERED]"}}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test8@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 226ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 3035)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-12 18:09:19 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test8@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test8@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test8@test.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 229ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 2932)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 18:12:09 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"match de foot", "description"=>"PSG - Rennes", "price"=>"30", "category"=>"sports", "address"=>"4 rue de Villiers", "zip_code"=>"7507", "city"=>"Paris3", "borough"=>"7"}}
+Completed 422 Unprocessable Entity in 48ms (Views: 9.6ms | ActiveRecord: 5.5ms | Allocations: 24052)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 18:12:44 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"match de foot", "description"=>"PSG - Rennes", "price"=>"30", "category"=>"sports", "address"=>"4 rue de Villiers", "zip_code"=>"75006", "city"=>"Paris", "borough"=>"6"}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 666)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 18:13:06 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"match de foot", "description"=>"PSG - Rennes", "price"=>"30", "category"=>"sports", "address"=>"4 rue de Villiers", "zip_code"=>"75006", "city"=>"Paris", "borough"=>"6"}}
+Completed 422 Unprocessable Entity in 9ms (Views: 0.4ms | ActiveRecord: 3.1ms | Allocations: 4819)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 18:13:17 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"match de foot", "description"=>"PSG - Rennes", "price"=>"30", "category"=>"sports", "address"=>"4 rue de Villiers", "zip_code"=>"75006", "city"=>"Paris", "borough"=>"6"}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 666)
+
+
+Started POST "/places" for 127.0.0.1 at 2023-09-12 18:13:38 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"match de foot", "description"=>"PSG - Rennes", "price"=>"30", "category"=>"sports", "address"=>"4 rue de Villiers", "zip_code"=>"75006", "city"=>"Paris", "borough"=>"6"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mPlace Create (3.7ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "match de foot"], ["description", "PSG - Rennes"], ["price", 30], ["category", "sports"], ["image", nil], ["address", "4 rue de Villiers"], ["zip_code", 75006], ["city", "Paris"], ["borough", 6], ["url", nil], ["created_at", "2023-09-12 16:13:38.850029"], ["updated_at", "2023-09-12 16:13:38.850029"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:20:in `create'
+Completed 201 Created in 19ms (Views: 0.7ms | ActiveRecord: 9.0ms | Allocations: 6337)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-13 11:40:36 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (7.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test10@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test10@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (4.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test10@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (22.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test10@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 09:40:37.314937"], ["updated_at", "2023-09-13 09:40:37.314937"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (25.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Completed 200 OK in 830ms (Views: 0.7ms | ActiveRecord: 73.0ms | Allocations: 47827)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-13 11:40:51 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test11@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test11@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test11@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test11@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 09:40:52.049616"], ["updated_at", "2023-09-13 09:40:52.049616"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+Completed 200 OK in 390ms (Views: 0.3ms | ActiveRecord: 18.9ms | Allocations: 5271)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-13 11:41:01 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test12@test.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test12@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test12@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test12@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 09:41:01.909325"], ["updated_at", "2023-09-13 09:41:01.909325"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (15.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+Completed 200 OK in 361ms (Views: 0.3ms | ActiveRecord: 16.5ms | Allocations: 5290)
+
+
