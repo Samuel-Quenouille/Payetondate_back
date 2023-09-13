@@ -706,3 +706,122 @@ Processing by Users::RegistrationsController#create as */*
 Completed 200 OK in 361ms (Views: 0.3ms | ActiveRecord: 16.5ms | Allocations: 5290)
 
 
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTestimonies (20230913115855)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.9ms)[0m  [1m[35mCREATE TABLE "testimonies" ("id" bigserial primary key, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230913115855"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBooleanToTestimonies (20230913121019)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mALTER TABLE "testimonies" ADD "is_validate" boolean DEFAULT FALSE[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230913121019"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/testimonies" for 127.0.0.1 at 2023-09-13 14:16:30 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TestimoniesController#create as */*
+  Parameters: {"testimony"=>{"description"=>"Quand j'ai décidé de planifier un date avec Laura, j'ai cherché quelque chose de romantique. La catégorie 'spots à bisous' sur 'Paye Ton Date' m'a tout de suite sauté aux yeux. J'ai réservé une journée au Parc des Amoureux, et c'était absolument parfait ! Nous avons pique-niqué près du lac, marché main dans la main, et avons partagé notre premier bisou sous les arbres."}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+  [1m[36mTestimony Create (9.5ms)[0m  [1m[32mINSERT INTO "testimonies" ("description", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["description", "Quand j'ai décidé de planifier un date avec Laura, j'ai cherché quelque chose de romantique. La catégorie 'spots à bisous' sur 'Paye Ton Date' m'a tout de suite sauté aux yeux. J'ai réservé une journée au Parc des Amoureux, et c'était absolument parfait ! Nous avons pique-niqué près du lac, marché main dans la main, et avons partagé notre premier bisou sous les arbres."], ["created_at", "2023-09-13 12:16:30.683648"], ["updated_at", "2023-09-13 12:16:30.683648"], ["is_validate", false]]
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (8.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+Completed 201 Created in 76ms (Views: 0.9ms | ActiveRecord: 22.1ms | Allocations: 38515)
+
+
+Started POST "/testimonies" for 127.0.0.1 at 2023-09-13 14:17:35 +0200
+Processing by TestimoniesController#create as */*
+  Parameters: {"testimony"=>{"description"=>"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux."}}
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+  [1m[36mTestimony Create (2.2ms)[0m  [1m[32mINSERT INTO "testimonies" ("description", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["description", "J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux."], ["created_at", "2023-09-13 12:17:35.765838"], ["updated_at", "2023-09-13 12:17:35.765838"], ["is_validate", false]]
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (122.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/testimonies_controller.rb:20:in `create'
+Completed 201 Created in 133ms (Views: 1.0ms | ActiveRecord: 126.0ms | Allocations: 1877)
+
+
+Started GET "/testimonies" for 127.0.0.1 at 2023-09-13 14:17:46 +0200
+Processing by TestimoniesController#index as */*
+  Parameters: {"testimony"=>{"description"=>"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux."}}
+  [1m[36mTestimony Load (0.3ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies"[0m
+  ↳ app/controllers/testimonies_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 1031)
+
+
+Started GET "/testimonies/1" for 127.0.0.1 at 2023-09-13 14:17:50 +0200
+Processing by TestimoniesController#show as */*
+  Parameters: {"testimony"=>{"description"=>"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux."}, "id"=>"1"}
+  [1m[36mTestimony Load (0.2ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies" WHERE "testimonies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/testimonies_controller.rb:44:in `set_testimony'
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 1469)
+
+
+Started GET "/testimonies/2" for 127.0.0.1 at 2023-09-13 14:17:53 +0200
+Processing by TestimoniesController#show as */*
+  Parameters: {"testimony"=>{"description"=>"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux."}, "id"=>"2"}
+  [1m[36mTestimony Load (16.4ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies" WHERE "testimonies"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/testimonies_controller.rb:44:in `set_testimony'
+Completed 200 OK in 19ms (Views: 0.3ms | ActiveRecord: 16.4ms | Allocations: 626)
+
+
+  [1m[36mPlace Load (1.3ms)[0m  [1m[34mSELECT "places".* FROM "places"[0m
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTestimony Load (0.6ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies"[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@admin.fr"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "admin@admin.fr"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 12:25:26.659893"], ["updated_at", "2023-09-13 12:25:26.659893"], ["is_admin", true], ["pseudo", nil]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (10.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (9.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 6]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 7]]
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 8]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 9]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 10]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 11]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@admin.fr"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "admin@admin.fr"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 12:28:02.967155"], ["updated_at", "2023-09-13 12:28:02.967155"], ["is_admin", true], ["pseudo", nil]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "test@test.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-13 12:28:03.186691"], ["updated_at", "2023-09-13 12:28:03.186691"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
