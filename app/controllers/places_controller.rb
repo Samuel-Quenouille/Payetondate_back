@@ -4,6 +4,7 @@ class PlacesController < ApplicationController
   # GET /places
   def index
     @places = Place.all
+    @places_true = Place.where(is_validate: true)
 
     render json: @places
   end
