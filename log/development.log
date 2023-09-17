@@ -841,3 +841,195 @@ Completed 204 No Content in 106ms (ActiveRecord: 14.0ms | Allocations: 38880)
 
 
   [1m[36mTestimony Load (0.5ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies"[0m
+Started POST "/users/sign_in" for ::1 at 2023-09-14 17:44:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 313ms (Views: 0.6ms | ActiveRecord: 17.7ms | Allocations: 43195)
+
+
+Started POST "/places" for ::1 at 2023-09-14 17:45:10 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"2ème lieu", "description"=>"Créé le 14 sept", "price"=>"option2", "category"=>"", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"2", "url"=>""}}
+Completed 422 Unprocessable Entity in 127ms (Views: 25.6ms | ActiveRecord: 16.8ms | Allocations: 21176)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 17:52:59 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 235ms (Views: 1.0ms | ActiveRecord: 7.4ms | Allocations: 4529)
+
+
+Started POST "/places" for ::1 at 2023-09-14 17:53:25 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"2", "description"=>"Créé le 14", "price"=>"", "category"=>"", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"2", "url"=>""}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 957)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 18:01:34 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 232ms (Views: 0.3ms | ActiveRecord: 8.4ms | Allocations: 4470)
+
+
+Started POST "/places" for ::1 at 2023-09-14 18:03:51 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"2ème lieu", "description"=>"Créé le 14", "price"=>"30", "category"=>"", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"2", "url"=>""}}
+Completed 422 Unprocessable Entity in 3ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 656)
+
+
+Started POST "/places" for ::1 at 2023-09-14 18:08:42 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"2ème lieu", "description"=>"Créé le 14", "price"=>"30", "category"=>"", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"2", "url"=>""}}
+Completed 422 Unprocessable Entity in 12ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 651)
+
+
+Started POST "/places" for ::1 at 2023-09-14 18:11:02 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"2ème lieu", "description"=>"Créé le 14", "price"=>"30", "category"=>"Sport", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"2", "url"=>""}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mPlace Create (4.2ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "2ème lieu"], ["description", "Créé le 14"], ["price", 30], ["category", "Sport"], ["image", nil], ["address", "4 RUE DE VILLIERS"], ["zip_code", 78710], ["city", "ROSNY-SUR-SEINE"], ["borough", 2], ["url", ""], ["created_at", "2023-09-14 16:11:02.450644"], ["updated_at", "2023-09-14 16:11:02.450644"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+Completed 201 Created in 20ms (Views: 2.9ms | ActiveRecord: 5.5ms | Allocations: 2509)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 20:21:59 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 291ms (Views: 1.3ms | ActiveRecord: 19.5ms | Allocations: 43198)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 20:23:38 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 224ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 1574)
+
+
+Started POST "/places" for ::1 at 2023-09-14 20:24:12 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"New", "description"=>"test", "price"=>"20", "category"=>"Sport", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"1", "url"=>""}}
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mPlace Create (9.6ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "New"], ["description", "test"], ["price", 20], ["category", "Sport"], ["image", nil], ["address", "4 RUE DE VILLIERS"], ["zip_code", 78710], ["city", "ROSNY-SUR-SEINE"], ["borough", 1], ["url", ""], ["created_at", "2023-09-14 18:24:12.588982"], ["updated_at", "2023-09-14 18:24:12.588982"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+Completed 201 Created in 112ms (Views: 0.7ms | ActiveRecord: 15.8ms | Allocations: 21468)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 20:26:27 +0200
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 230ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 1578)
+
+
+Started POST "/users" for ::1 at 2023-09-14 20:26:48 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 231ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 3919)
+
+
+Started POST "/users" for ::1 at 2023-09-14 20:26:58 +0200
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"quenouille_samuel@yahoo.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"quenouille_samuel@yahoo.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "quenouille_samuel@yahoo.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "is_admin", "pseudo") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "quenouille_samuel@yahoo.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-14 18:26:59.103840"], ["updated_at", "2023-09-14 18:26:59.103840"], ["is_admin", nil], ["pseudo", nil]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 230ms (Views: 0.2ms | ActiveRecord: 3.9ms | Allocations: 4200)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 21:28:12 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+Completed 200 OK in 329ms (Views: 3.0ms | ActiveRecord: 8.0ms | Allocations: 43193)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-14 21:48:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+Completed 200 OK in 300ms (Views: 2.1ms | ActiveRecord: 13.6ms | Allocations: 43199)
+
+
+Started POST "/places" for ::1 at 2023-09-14 21:49:13 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Bord de seine", "description"=>"Bord de seine", "price"=>"0", "category"=>"Spot à bisou(s)", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"78710", "city"=>"ROSNY-SUR-SEINE", "borough"=>"1", "url"=>""}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mPlace Create (36.6ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "Bord de seine"], ["description", "Bord de seine"], ["price", 0], ["category", "Spot à bisou(s)"], ["image", nil], ["address", "4 RUE DE VILLIERS"], ["zip_code", 78710], ["city", "ROSNY-SUR-SEINE"], ["borough", 1], ["url", ""], ["created_at", "2023-09-14 19:49:13.609499"], ["updated_at", "2023-09-14 19:49:13.609499"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+Completed 201 Created in 138ms (Views: 4.4ms | ActiveRecord: 40.3ms | Allocations: 21477)
+
+
+  [1m[36mPlace Load (0.6ms)[0m  [1m[34mSELECT "places".* FROM "places"[0m
+Started POST "/users/sign_in" for ::1 at 2023-09-14 22:01:50 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"sam@sam.fr", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sam@sam.fr"], ["LIMIT", 1]]
+Completed 200 OK in 285ms (Views: 2.0ms | ActiveRecord: 11.5ms | Allocations: 43193)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-16 14:25:23 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+Completed 200 OK in 347ms (Views: 0.9ms | ActiveRecord: 18.4ms | Allocations: 43193)
+
+
+Started POST "/places" for ::1 at 2023-09-16 14:26:44 +0200
+Processing by PlacesController#create as */*
+  Parameters: {"place"=>{"title"=>"Test", "description"=>"Créé le 16", "price"=>"0", "category"=>"Spot à bisou(s)", "address"=>"4 RUE DE VILLIERS", "zip_code"=>"75000", "city"=>"PARIS", "borough"=>"4", "url"=>""}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mPlace Create (6.1ms)[0m  [1m[32mINSERT INTO "places" ("title", "description", "price", "category", "image", "address", "zip_code", "city", "borough", "url", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["title", "Test"], ["description", "Créé le 16"], ["price", 0], ["category", "Spot à bisou(s)"], ["image", nil], ["address", "4 RUE DE VILLIERS"], ["zip_code", 75000], ["city", "PARIS"], ["borough", 4], ["url", ""], ["created_at", "2023-09-16 12:26:44.160645"], ["updated_at", "2023-09-16 12:26:44.160645"], ["is_validate", false]]
+  ↳ app/controllers/places_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/places_controller.rb:21:in `create'
+Completed 201 Created in 91ms (Views: 0.6ms | ActiveRecord: 12.7ms | Allocations: 21479)
+
+
+Started POST "/testimonies" for ::1 at 2023-09-16 16:18:00 +0200
+Processing by TestimoniesController#create as */*
+  Parameters: {"testimony"=>{"description"=>"\"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux.\""}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTestimony Create (4.1ms)[0m  [1m[32mINSERT INTO "testimonies" ("description", "created_at", "updated_at", "is_validate") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["description", "\"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux.\""], ["created_at", "2023-09-16 14:18:00.144551"], ["updated_at", "2023-09-16 14:18:00.144551"], ["is_validate", false]]
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+Completed 201 Created in 74ms (Views: 3.3ms | ActiveRecord: 31.3ms | Allocations: 6638)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddFirstNameAndAgeToTestimonies (20230917142314)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.0ms)[0m  [1m[35mALTER TABLE "testimonies" ADD "age" integer[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "testimonies" ADD "first_name" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230917142314"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
