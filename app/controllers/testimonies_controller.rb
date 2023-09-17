@@ -47,6 +47,6 @@ class TestimoniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def testimony_params
-      params.require(:testimony).permit(:description)
+      params.require(:testimony).permit(:first_name, :age, :description)
     end
 end
