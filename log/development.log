@@ -1033,3 +1033,32 @@ Migrating to AddFirstNameAndAgeToTestimonies (20230917142314)
   [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(699464781723747060)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/testimonies" for ::1 at 2023-09-17 16:28:10 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TestimoniesController#create as */*
+  Parameters: {"testimony"=>{"first_name"=>"Samuel", "age"=>"30", "description"=>"\"Quand j'ai décidé de planifier un date avec Laura, j'ai cherché quelque chose de romantique. La catégorie 'spots à bisous' sur 'Paye Ton Date' m'a tout de suite sauté aux yeux. J'ai réservé une journée au Parc des Amoureux, et c'était absolument parfait ! Nous avons pique-niqué près du lac, marché main dans la main, et avons partagé notre premier bisou sous les arbres.\""}}
+[31mUnpermitted parameters: :first_name, :age. Context: { controller: TestimoniesController, action: create, request: #<ActionDispatch::Request:0x00007f7ff53f30a0>, params: {"testimony"=>{"first_name"=>"Samuel", "age"=>"30", "description"=>"\"Quand j'ai décidé de planifier un date avec Laura, j'ai cherché quelque chose de romantique. La catégorie 'spots à bisous' sur 'Paye Ton Date' m'a tout de suite sauté aux yeux. J'ai réservé une journée au Parc des Amoureux, et c'était absolument parfait ! Nous avons pique-niqué près du lac, marché main dans la main, et avons partagé notre premier bisou sous les arbres.\""}, "controller"=>"testimonies", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTestimony Create (1.1ms)[0m  [1m[32mINSERT INTO "testimonies" ("description", "created_at", "updated_at", "is_validate", "age", "first_name") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "\"Quand j'ai décidé de planifier un date avec Laura, j'ai cherché quelque chose de romantique. La catégorie 'spots à bisous' sur 'Paye Ton Date' m'a tout de suite sauté aux yeux. J'ai réservé une journée au Parc des Amoureux, et c'était absolument parfait ! Nous avons pique-niqué près du lac, marché main dans la main, et avons partagé notre premier bisou sous les arbres.\""], ["created_at", "2023-09-17 14:28:10.410971"], ["updated_at", "2023-09-17 14:28:10.410971"], ["is_validate", false], ["age", nil], ["first_name", nil]]
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+Completed 201 Created in 53ms (Views: 0.9ms | ActiveRecord: 9.2ms | Allocations: 39751)
+
+
+  [1m[36mTestimony Load (0.4ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies"[0m
+Started POST "/testimonies" for ::1 at 2023-09-17 16:31:33 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (5.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TestimoniesController#create as */*
+  Parameters: {"testimony"=>{"first_name"=>"Samuel", "age"=>"30", "description"=>"\"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux.\""}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTestimony Create (0.6ms)[0m  [1m[32mINSERT INTO "testimonies" ("description", "created_at", "updated_at", "is_validate", "age", "first_name") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "\"J'ai toujours été un grand fan de magie, alors quand j'ai découvert le site 'Paye Ton Date' et vu la catégorie 'insolite', j'ai été intriguée. J'ai trouvé un lieu parfait pour mon date avec Louise. Nous avons choisi le Musée de la Magie, et ce fut incroyable ! C'était un endroit vraiment unique, et cela a rendu notre soirée spéciale. De quoi repartir avec des étoiles plein les yeux.\""], ["created_at", "2023-09-17 14:31:33.788533"], ["updated_at", "2023-09-17 14:31:33.788533"], ["is_validate", false], ["age", 30], ["first_name", "Samuel"]]
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/testimonies_controller.rb:21:in `create'
+Completed 201 Created in 49ms (Views: 0.7ms | ActiveRecord: 18.1ms | Allocations: 39679)
+
+
+  [1m[36mTestimony Load (0.5ms)[0m  [1m[34mSELECT "testimonies".* FROM "testimonies"[0m
