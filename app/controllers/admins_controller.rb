@@ -6,11 +6,10 @@ class AdminsController < ApplicationController
 
     def update
         @place = Place.find(params[:id])
-        @testimony = Testimony.find(params[:id])
-        if @place.update(is_validate: true) && @testimony.update(is_validate: true)
-            redirect_to admin_path, notice: "L'événement a été mis à jour avec succès."
+        if @place.update(is_validate: true)
+            redirect_to admin_path, notice: "Le lieu a été validé avec succès."
         else
-            flash[:error] = "La mise à jour de l'événement a échoué."
+            flash[:error] = "La validation du lieu a échoué."
             render :show
         end
     end
