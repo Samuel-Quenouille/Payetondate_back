@@ -25,13 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_142314) do
   create_table "places", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "price"
+    t.string "price"
     t.string "category"
     t.string "image"
     t.string "address"
     t.integer "zip_code"
     t.string "city"
-    t.integer "borough"
+    t.string "borough"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
