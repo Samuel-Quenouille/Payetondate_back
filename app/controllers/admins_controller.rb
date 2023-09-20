@@ -4,12 +4,22 @@ class AdminsController < ApplicationController
         @testimonies_false = Testimony.where(is_validate: false)
     end
 
-    def update
+    def update_place
         @place = Place.find(params[:id])
         if @place.update(is_validate: true)
             redirect_to admin_path, notice: "Le lieu a été validé avec succès."
         else
             flash[:error] = "La validation du lieu a échoué."
+            render :show
+        end
+    end
+
+    def update_testimony
+        @testimony = Testimony.find(params[:id])
+        if @testimony.update(is_validate: true)
+            redirect_to admin_path, notice: "Le témoignage a été validé avec succès."
+        else
+            flash[:error] = "La validation du témoignage a échoué."
             render :show
         end
     end
