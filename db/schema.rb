@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_17_142314) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_133034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_142314) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_validate", default: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_places_on_user_id"
   end
 
   create_table "testimonies", force: :cascade do |t|
@@ -61,4 +63,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_142314) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "places", "users"
 end

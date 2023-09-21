@@ -45,8 +45,14 @@ class PlacesController < ApplicationController
       @place = Place.find(params[:id])
     end
 
+    def check_author
+      unless current_user == @article.user
+      redirect_to root_path
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def place_params
-      params.require(:place).permit(:title, :description, :price, :category, :image, :address, :zip_code, :city, :borough, :url, :is_validate)
+      params.require(:place).permit(:title, :description, :price, :category, :image, :address, :zip_code, :city, :borough, :url, :user_id, :is_validate)
     end
 end
