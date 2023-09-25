@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_action :set_place, only: %i[ show update destroy ]
+  before_action :set_place, only: %i[ show edit update destroy ]
 
   # GET /places
   def index
@@ -12,6 +12,16 @@ class PlacesController < ApplicationController
   # GET /places/1
   def show
     render json: @place
+  end
+
+  # GET /places/new
+  def new
+    @place = Place.new
+  end
+
+  # GET /places/1/edit
+  def edit
+    @place = Place.find(params[:id])
   end
 
   # POST /places
@@ -43,12 +53,6 @@ class PlacesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_place
       @place = Place.find(params[:id])
-    end
-
-    def check_author
-      unless current_user == @article.user
-      redirect_to root_path
-      end
     end
 
     # Only allow a list of trusted parameters through.
