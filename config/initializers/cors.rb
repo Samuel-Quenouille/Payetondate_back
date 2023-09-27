@@ -7,8 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'https://payetondate-front-wheat.vercel.app', 'https://payetondate-5cdfb8df0574.herokuapp.com'
-  
+      origins 'https://payetondate-front-wheat.vercel.app'
+      
       resource '*',
                headers: :any,
                methods: %i[get post put patch delete options head],
